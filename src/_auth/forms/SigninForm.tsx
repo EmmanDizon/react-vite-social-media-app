@@ -17,11 +17,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { signInAccount } from "@/lib/appwrite/api";
 import { useUserContext } from "@/context/AuthContext";
+import { useState } from "react";
 
 const SigninForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading } = useUserContext();
+  const { checkAuthUser } = useUserContext();
 
   const form = useForm<z.infer<typeof SignInValidation>>({
     resolver: zodResolver(SignInValidation),
@@ -32,25 +34,31 @@ const SigninForm = () => {
   });
 
   const handleSignin = async (values: z.infer<typeof SignInValidation>) => {
+    setIsLoading(true);
+
     const session = await signInAccount({
       email: values.email,
       password: values.password,
     });
 
-    if (!session)
-      return toast({
+    if (!session) {
+      toast({
         title: "Sign in failed. Please try again.",
         variant: "destructive",
       });
-
+      setIsLoading(false);
+      return;
+    }
     const isLoggedIn = await checkAuthUser();
 
     if (isLoggedIn) {
       form.reset();
+      setIsLoading(false);
       navigate("/");
     } else {
+      setIsLoading(false);
       toast({
-        title: "Sign in failed1. Please try again",
+        title: "Sign in failed. Please try again",
         variant: "destructive",
       });
     }
