@@ -3,9 +3,10 @@ import SigninForm from "./_auth/forms/SigninForm";
 import SignUpForm from "./_auth/forms/SignUpForm";
 import { Home } from "./_root/pages";
 import RootLayout from "./_root/RootLayout";
-import "./globals.css";
-
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "./components/ui/toaster";
+
+import "./globals.css";
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
           <Route index element={<Home />} />
         </Route>
       </Routes>
+
+      <Toaster />
     </main>
   );
 };
