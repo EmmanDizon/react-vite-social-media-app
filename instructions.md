@@ -18,3 +18,8 @@
 
 ## React Router
 1. npm i react-router-dom
+
+## ShadCN (https://ui.shadcn.com/docs/installation) using vite
+1. follow step 3 and 4
+2. npm i -D @types/node
+3. follow step number 5
