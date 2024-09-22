@@ -4,7 +4,7 @@ const CreatePost = () => {
   return (
     <div className="flex flex-1">
       <div className="common-container">
-        <div className="max-w-5xl flex-start gap-3 w-full ">
+        <div className="max-w-5xl flex-start gap-3 w-full justify-start">
           <img
             src="/assets/icons/add-post.svg"
             width={36}
