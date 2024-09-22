@@ -156,7 +156,7 @@ export async function uploadFile(file: File) {
 
     return uploadedFile;
   } catch (error) {
-    console.log("POGI SI EMMAN ", error);
+    console.log(error);
   }
 }
 
